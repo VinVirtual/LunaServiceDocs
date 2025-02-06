@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna Speech AI Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1>Luna Speech AI Documentation</h1>
+            <p>Comprehensive guide to integrating natural conversational AI with text and speech capabilities</p>
+        </div>
+
+        <nav class="section-nav">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#code-examples">Code Examples</a></li>
+                <li><a href="#basic-usage">Basic Usage</a></li>
+                <li><a href="#advanced-usage">Advanced Usage</a></li>
+                <li><a href="#api-reference">API Reference</a></li>
+            </ul>
+        </nav>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Natural Conversations</h3>
+                <p>Engage users with human-like interactions through both text and voice responses</p>
+            </div>
+            <div class="feature-card">
+                <h3>Multi-modal Output</h3>
+                <p>Receive both text and audio responses in a single API call</p>
+            </div>
+            <div class="feature-card">
+                <h3>Easy Integration</h3>
+                <p>Simple REST API with comprehensive SDK support for multiple languages</p>
+            </div>
+        </div>
+
+        <div class="documentation-section" id="overview">
+            <h2>Overview</h2>
+            <p>The Luna Speech AI Python client provides a seamless way to interact with the Luna AI platform, enabling both text and speech-based conversations. The client handles authentication, request formatting, and response processing automatically.</p>
+        </div>
+
+        <div class="documentation-section" id="code-examples">
+            <h2>Code Examples</h2>
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="curl">Shell</button>
+                <button class="lang-btn" data-lang="python">Python</button>
+                <button class="lang-btn" data-lang="javascript">JavaScript</button>
+            </div>
+
+            <!-- cURL -->
+            <div class="code-block active" data-lang="curl">
+                <div class="code-section">
+                    <pre><code>curl \
+    --request POST \
+    --header 'Authorization: Bearer YOUR_API_KEY' \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "text": "Hey Luna, what do you think about AI music?",
+        "messageHistory": []
+    }' \
+    --url 'https://ffc1-202-188-124-178.ngrok-free.app/chat'</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+
+            <!-- Python -->
+            <div class="code-block" data-lang="python">
+                <div class="code-section">
+                    <pre><code>import requests
+import base64
+
+def chat_with_luna(text, api_key, message_history=None):
+    url = "https://ffc1-202-188-124-178.ngrok-free.app/chat"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    
+    data = {
+        "text": text,
+        "messageHistory": message_history or []
+    }
+    
+    response = requests.post(url, headers=headers, json=data)
+    if response.status_code == 200:
+        result = response.json()
+        
+        # Get the text response
+        text_response = result['text']
+        print("Luna's response:", text_response)
+        
+        # Save audio file
+        audio_data = base64.b64decode(result['audio'])
+        with open('luna_response.wav', 'wb') as f:
+            f.write(audio_data)
+        print("Audio saved as luna_response.wav")
+        
+        return text_response
+    else:
+        print("Error:", response.status_code, response.text)
+        return None
+
+api_key = "YOUR_API_KEY"
+response = chat_with_luna(
+    "Hey Luna, what do you think about AI music?", 
+    api_key
+)</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="code-block" data-lang="javascript">
+                <div class="code-section">
+                    <pre><code>async function chatWithLuna(text, apiKey, messageHistory = []) {
+  try {
+    const response = await fetch('https://ffc1-202-188-124-178.ngrok-free.app/chat', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text,
+        messageHistory
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    // Log text response
+    console.log("Luna's response:", data.text);
+    
+    // Convert and save audio
+    const audioData = Buffer.from(data.audio, 'base64');
+    require('fs').writeFileSync('luna_response.wav', audioData);
+    console.log("Audio saved as luna_response.wav");
+    
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return null;
+  }
+}
+
+// Example usage
+const apiKey = 'YOUR_API_KEY';
+chatWithLuna(
+  "Hey Luna, what do you think about AI music?", 
+  apiKey
+);</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="documentation-section" id="basic-usage">
+            <h2>Basic Usage (Without Message History)</h2>
+            <p>The simplest way to use Luna Speech AI is without message history, which starts a fresh conversation:</p>
+            <div class="code-section">
+                <pre><code>import requests
+import base64
+
+api_key = "YOUR_API_KEY"
+response = chat_with_luna(
+    "Hey Luna, what do you think about AI music?", 
+    api_key
+)</code></pre>
+                <button class="copy-btn">Copy</button>
+            </div>
+        </div>
+
+        <div class="documentation-section" id="advanced-usage">
+            <h2>Advanced Usage (With Message History)</h2>
+            <p>To maintain context across multiple interactions, you can provide conversation history:</p>
+            <div class="code-section">
+                <pre><code>message_history = [
+    {
+        "role": "user",
+        "content": "Hello what is the biggest state in america"
+    },
+    {
+        "role": "assistant",
+        "content": "The biggest state in America is Alaska..."
+    },
+    {
+        "role": "user",
+        "content": "What is 5+5?"
+    },
+    {
+        "role": "assistant",
+        "content": "5 + 5 = 10"
+    }
+]
+
+response = chat_with_luna(
+    "Hey Luna, tell me what questions did I ask you.",
+    api_key,
+    message_history=message_history
+)</code></pre>
+                <button class="copy-btn">Copy</button>
+            </div>
+        </div>
+
+        <div class="documentation-section" id="api-reference">
+            <h2>API Reference</h2>
+            <h3>Parameters</h3>
+            <table class="parameter-table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>text</td>
+                    <td>str</td>
+                    <td>The input text message to send to Luna AI</td>
+                </tr>
+                <tr>
+                    <td>api_key</td>
+                    <td>str</td>
+                    <td>Your Luna API authentication key</td>
+                </tr>
+                <tr>
+                    <td>message_history</td>
+                    <td>list</td>
+                    <td>Optional. Previous conversation history in a specific format</td>
+                </tr>
+            </table>
+
+            <div class="note-box">
+                <strong>Note:</strong> The audio file is overwritten with each new response. Consider implementing custom file naming if you need to preserve multiple responses.
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
