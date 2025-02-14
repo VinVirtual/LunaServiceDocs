@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luna API Documentation</title>
+    <title>OpenMind API Documentation</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Hero Section -->
         <div class="hero-section">
-            <h1>Luna API Documentation</h1>
+            <h1>OpenMind API Documentation</h1>
             <p>Comprehensive guide to integrating natural conversational AI with text and speech capabilities</p>
         </div>
 
@@ -109,7 +109,7 @@ response = chat_with_luna(
                 <div class="code-section">
                     <pre><code>import requests
 
-url = "http://localhost:3000/api/v1/text/chat"
+url = "http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/text/chat"
 headers = {
     "Authorization": "Bearer your_api_key_here",
     "Content-Type": "application/json"
@@ -168,9 +168,9 @@ def save_base64_to_wav(base64_string, output_filename="output.wav"):
     except Exception as e:
         print("Error decoding audio:", e)
 
-url = "http://localhost:3000/api/v1/speech/chat"
+url = "http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/speech/chat"
 headers = {
-    "Authorization": "Bearer d6973887-3024-480d-a099-51f9948fc3a6",
+    "Authorization": "Bearer your_api_key_here",
     "Content-Type": "application/json"
 }
 data = {
@@ -196,32 +196,70 @@ else:
         <!-- API Reference Section -->
         <div class="documentation-section" id="api-reference">
             <h2>API Reference</h2>
-            <h3>Parameters</h3>
-            <table class="parameter-table">
-                <tr>
-                    <th>Parameter</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>text</td>
-                    <td>str</td>
-                    <td>The input text message to send to Luna AI</td>
-                </tr>
-                <tr>
-                    <td>api_key</td>
-                    <td>str</td>
-                    <td>Your Luna API authentication key</td>
-                </tr>
-                <tr>
-                    <td>message_history</td>
-                    <td>list</td>
-                    <td>Optional. Previous conversation history in a specific format</td>
-                </tr>
-            </table>
+            <div class="api-reference-container">
+                <div class="api-parameters">
+                    <h3>Parameters</h3>
+                    <div class="parameter-card">
+                        <div class="parameter-header">
+                            <span class="parameter-name">text</span>
+                            <span class="parameter-type">string</span>
+                        </div>
+                        <div class="parameter-description">
+                            <p>The input text message to send to Luna AI. This is the core message that will be processed by the AI.</p>
+                            <div class="parameter-details">
+                                <span class="parameter-required">Required</span>
+                                <span class="parameter-example">Example: "Hello Luna, how are you?"</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-header">
+                            <span class="parameter-name">api_key</span>
+                            <span class="parameter-type">string</span>
+                        </div>
+                        <div class="parameter-description">
+                            <p>Your Luna API authentication key. This is used to authenticate and authorize your API requests.</p>
+                            <div class="parameter-details">
+                                <span class="parameter-required">Required</span>
+                                <span class="parameter-example">Example: "fd58e942-bf71-4245-98b7-defc984e5904"</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parameter-card">
+                        <div class="parameter-header">
+                            <span class="parameter-name">message_history</span>
+                            <span class="parameter-type">array</span>
+                        </div>
+                        <div class="parameter-description">
+                            <p>Optional list of previous conversation messages to maintain context and enable more natural conversations.</p>
+                            <div class="parameter-details">
+                                <span class="parameter-optional">Optional</span>
+                                <span class="parameter-example">Example: [{role: "user", content: "Hello"}, {role: "assistant", content: "Hi there!"}]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="api-response-info">
+                    <h3>Response Structure</h3>
+                    <div class="response-card">
+                        <div class="response-header">Text Mode</div>
+                        <pre><code>{
+"text": "Luna's response text"
+}</code></pre>
+                    </div>
+                    <div class="response-card">
+                        <div class="response-header">Speech Mode</div>
+                        <pre><code>{
+"text": "Luna's response text",
+"audio": "base64_encoded_audio_string"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
 
-            <div class="note-box">
-                <strong>Note:</strong> The audio file is overwritten with each new response. Consider implementing custom file naming if you need to preserve multiple responses.
+            <div class="note-box warning">
+                <strong>Security Note:</strong> Always keep your API key confidential and use HTTPS for all API requests.
             </div>
         </div>
     </div>

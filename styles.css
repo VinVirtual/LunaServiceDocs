@@ -370,3 +370,117 @@ code {
 }
 
 /* Responsive design */
+/* API Reference Styles */
+.api-reference-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.api-parameters,
+.api-response-info {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.parameter-card,
+.response-card {
+    background-color: #2d2d2d;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.parameter-card:hover,
+.response-card:hover {
+    background-color: #333;
+}
+
+.parameter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.parameter-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.parameter-type {
+    background-color: #4a4a4a;
+    color: #4CAF50;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+.parameter-description p {
+    margin: 0 0 10px 0;
+    color: #d0d0d0;
+}
+
+.parameter-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px; /* Added more space between label and example */
+}
+
+.parameter-required,
+.parameter-optional,
+.parameter-example {
+    font-size: 0.9em;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.parameter-required {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.parameter-optional {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+.parameter-example {
+    background-color: #3d3d3d;
+    color: #888;
+}
+
+.response-header {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.response-card pre {
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Warning Note Box */
+.note-box.warning {
+    background-color: #2d2d2d;
+    border-left: 4px solid #ff9800;
+    margin-top: 20px;
+}
+
+.note-box.warning strong {
+    color: #ff9800;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .api-reference-container {
+        grid-template-columns: 1fr;
+    }
+}

@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ],
             code: {
-                shell: `curl -X POST http://localhost:3000/api/v1/text/chat \\
+                shell: `curl -X POST http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/text/chat \\
 -H "Authorization: Bearer your_api_key_here" \\
 -H "Content-Type: application/json" \\
 -d '{
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }'`,
                 python: `import requests
 
-url = "http://localhost:3000/api/v1/text/chat"
+url = "http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/text/chat"
 headers = {
     "Authorization": "Bearer your_api_key_here",
     "Content-Type": "application/json"
@@ -58,7 +58,7 @@ print(response.json())
 `,
                 javascript: `const fetch = require('node-fetch');
 
-const url = "http://localhost:3000/api/v1/text/chat";
+const url = "http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/text/chat";
 const headers = {
     "Authorization": "Bearer your_api_key_here",
     "Content-Type": "application/json"
@@ -100,7 +100,7 @@ fetch(url, {
                 }
             ],
             code: {
-                shell: `curl -X POST http://localhost:3000/api/v1/speech/chat \\
+                shell: `curl -X POST http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/speech/chat \\
 -H "Authorization: Bearer your_api_key_here" \\
 -H "Content-Type: application/json" \\
 -d '{
@@ -109,7 +109,7 @@ fetch(url, {
 }'`,
                 python: `import requests
 
-url = "http://localhost:3000/api/v1/speech/chat"
+url = "http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/speech/chat"
 headers = {
     "Authorization": "Bearer your_api_key_here",
     "Content-Type": "application/json"
@@ -124,7 +124,7 @@ print(response.json())  # This will return both text and base64-encoded audio
 `,
                 javascript: `const fetch = require('node-fetch');
 
-const url = "http://localhost:3000/api/v1/speech/chat";
+const url = "http://ec2-13-236-94-100.ap-southeast-2.compute.amazonaws.com/api/v1/speech/chat";
 const headers = {
     "Authorization": "Bearer your_api_key_here",
     "Content-Type": "application/json"
